@@ -5,7 +5,7 @@ use Text::ParseWords();
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 
 my %unescape = ( n => "\n", t => "\t", r => "\r", f => "\f");
@@ -32,7 +32,7 @@ sub connect
   my $h = IO::Socket::INET->new( PeerAddr => $host, PeerPort => $port )
     or die "Handle is undefined: $@";
   <$h>;
-  print $h "$user:$pass\n" or die $!;
+  print $h "$user:$pass:$lang:line\n" or die $!;
   while ( local $_ = <$h> ) {
     last if /^\001/;
   }
